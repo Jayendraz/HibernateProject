@@ -53,6 +53,7 @@
 
         <!-- Names the annotated entity class -->
         <mapping class="org.javabrains.jayendra.dto.UserDetails"/>
+        <mapping class="org.javabrains.jayendra.dto.Vehicle"/>
 
     </session-factory>
 

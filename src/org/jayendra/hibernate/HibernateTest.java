@@ -10,6 +10,8 @@ import org.hibernate.classic.Session;
 import org.hibernate.hql.ast.util.NodeTraverser.VisitationStrategy;
 import org.javabrains.jayendra.dto.Address;
 import org.javabrains.jayendra.dto.UserDetails;
+import org.javabrains.jayendra.dto.Vehicle;
+import org.omg.CORBA.PRIVATE_MEMBER;
 
 public class HibernateTest {
 
@@ -29,8 +31,13 @@ public class HibernateTest {
 		address2.setState("Washington");
 		address2.setPincode("987654");
 		
+		Vehicle vehicle = new Vehicle();
+		vehicle.setVehicleName("Audi");
+		
 		user.setUserId(1);
 		user.setUsedrName("First Name");
+		
+		user.setVehicle(vehicle);
 		
 		user.getListOfAddresses().add(address);
 		user.getListOfAddresses().add(address2);
@@ -47,12 +54,12 @@ public class HibernateTest {
 		session.save(user);
 		session.getTransaction().commit();
 		
-		user = null;
-		session = sessionFactory.openSession();
-		
-		user = (UserDetails) session.get(UserDetails.class, 1);
-		session.close();
-		System.out.println(user.getListOfAddresses().size());
+//		user = null;
+//		session = sessionFactory.openSession();
+//		
+//		user = (UserDetails) session.get(UserDetails.class, 1);
+//		session.close();
+//		System.out.println(user.getListOfAddresses().size());
 		
 		
 	}

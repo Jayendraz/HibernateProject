@@ -8,6 +8,7 @@ import java.util.Set;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
@@ -19,6 +20,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.Lob;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -46,6 +48,17 @@ public class UserDetails {
 	@Column(name="DESCRIPTION")
 	private String description;
 	
+	@OneToOne(cascade= {CascadeType.ALL})
+	@JoinColumn(name= "VEHICLE_ID")
+	private Vehicle vehicle;
+	
+	public Vehicle getVehicle() {
+		return vehicle;
+	}
+
+	public void setVehicle(Vehicle vehicle) {
+		this.vehicle = vehicle;
+	}
 	@ElementCollection(fetch= FetchType.EAGER)
 	@JoinTable(name="USER_ADDRESS", joinColumns=@JoinColumn(name="USER_ID"))
 	@GenericGenerator(name="hilo-gen", strategy="hilo")
