@@ -20,6 +20,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -48,10 +50,23 @@ public class UserDetails {
 	@Column(name="DESCRIPTION")
 	private String description;
 	
-	@OneToOne(cascade= {CascadeType.ALL})
+	@OneToOne
 	@JoinColumn(name= "VEHICLE_ID")
 	private Vehicle vehicle;
 	
+	@ManyToMany
+//	@JoinTable(joinColumns=@JoinColumn(name= "USER_ID"), 
+//	inverseJoinColumns=@JoinColumn(name="ACCOUNT_ID"))
+	private Collection<Account> accounts = new ArrayList<>();
+	
+	public Collection<Account> getAccounts() {
+		return accounts;
+	}
+
+	public void setAccounts(Collection<Account> accounts) {
+		this.accounts = accounts;
+	}
+
 	public Vehicle getVehicle() {
 		return vehicle;
 	}

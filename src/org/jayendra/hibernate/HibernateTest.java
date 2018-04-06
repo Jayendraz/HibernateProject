@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.classic.Session;
 import org.hibernate.hql.ast.util.NodeTraverser.VisitationStrategy;
+import org.javabrains.jayendra.dto.Account;
 import org.javabrains.jayendra.dto.Address;
 import org.javabrains.jayendra.dto.UserDetails;
 import org.javabrains.jayendra.dto.Vehicle;
@@ -34,24 +35,38 @@ public class HibernateTest {
 		Vehicle vehicle = new Vehicle();
 		vehicle.setVehicleName("Audi");
 		
+		Account savingAcc = new Account();
+		savingAcc.setAccountName("Savings");
+		
+		Account currentAcc = new Account();
+		currentAcc.setAccountName("Current");
+		
 		user.setUserId(1);
 		user.setUsedrName("First Name");
+		user.setJoinedDate(new Date());
+		user.setDescription("Description goes here");
 		
 		user.setVehicle(vehicle);
+		
+		user.getAccounts().add(savingAcc);
+		user.getAccounts().add(currentAcc);
 		
 		user.getListOfAddresses().add(address);
 		user.getListOfAddresses().add(address2);
 		
+//		savingAcc.setUser(user);
+//		currentAcc.setUser(user);
+		
 //		user.setHomeAddress(address);
 //		user.setOfficeAddress(address2);
-		
-		user.setJoinedDate(new Date());
-		user.setDescription("Description goes here");
-		
+				
 		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		session.save(user);
+		session.save(vehicle);
+		session.save(currentAcc);
+		session.save(savingAcc);
 		session.getTransaction().commit();
 		
 //		user = null;
