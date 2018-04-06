@@ -10,6 +10,8 @@ import org.hibernate.classic.Session;
 import org.hibernate.hql.ast.util.NodeTraverser.VisitationStrategy;
 import org.javabrains.jayendra.dto.Account;
 import org.javabrains.jayendra.dto.Address;
+import org.javabrains.jayendra.dto.FourWheeler;
+import org.javabrains.jayendra.dto.TwoWheeler;
 import org.javabrains.jayendra.dto.UserDetails;
 import org.javabrains.jayendra.dto.Vehicle;
 import org.omg.CORBA.PRIVATE_MEMBER;
@@ -34,6 +36,16 @@ public class HibernateTest {
 		
 		Vehicle vehicle = new Vehicle();
 		vehicle.setVehicleName("Audi");
+		
+		//Inheritance
+		
+		TwoWheeler bike = new TwoWheeler();
+		bike.setVehicleName("Ducati");
+		bike.setSteeringHandle("Ducati streeing handle");
+		
+		FourWheeler car = new FourWheeler();
+		car.setVehicleName("Porshe");
+		car.setSteeringWheel("Porshe streeing wheel");
 		
 		Account savingAcc = new Account();
 		savingAcc.setAccountName("Savings");
@@ -67,6 +79,8 @@ public class HibernateTest {
 		session.save(vehicle);
 		session.save(currentAcc);
 		session.save(savingAcc);
+		session.save(bike);
+		session.save(car);
 		session.getTransaction().commit();
 		
 //		user = null;

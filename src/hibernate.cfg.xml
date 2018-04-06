@@ -55,6 +55,8 @@
         <mapping class="org.javabrains.jayendra.dto.UserDetails"/>
         <mapping class="org.javabrains.jayendra.dto.Vehicle"/>
         <mapping class="org.javabrains.jayendra.dto.Account"/>
+        <mapping class="org.javabrains.jayendra.dto.TwoWheeler"/>
+        <mapping class="org.javabrains.jayendra.dto.FourWheeler"/>
 
     </session-factory>
 
