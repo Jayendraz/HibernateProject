@@ -1,5 +1,8 @@
 package org.jayendra.hibernate;
 
+import java.util.List;
+
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.SetSimpleValueTypeSecondPass;
@@ -21,18 +24,31 @@ public class CRUD_main {
 			session.save(user);
 		}
 		
-		UserDetails user = (UserDetails) session.get(UserDetails.class, 5);
-		session.delete(user);
+//		UserDetails user = (UserDetails) session.get(UserDetails.class, 5);
+//		session.delete(user);
 		
-		user = (UserDetails) session.get(UserDetails.class, 8);
-		user.setUsedrName("Updated Name");
+		UserDetails user = (UserDetails) session.get(UserDetails.class, 8);
+		
+		session.getTransaction().commit();			
+		session.close();
+		
+		user.setUsedrName("changed Name");
+		
+		session = sessionFactory.openSession();
+		session.beginTransaction();
+		session.update(user);
+		
+		Query query = session.createQuery("from UserDetails");
+		
+		List<UserDetails> userDetails = (List<UserDetails>) query.list();
+		
+		System.out.println(userDetails.size());
+		
+		for (UserDetails object : userDetails) {
+			System.out.println(object.getUsedrName());
+		}
 		
 		session.getTransaction().commit();
-		
-		
-		System.out.println("User Name is: " + user.getUsedrName());		
-		
-		
 		session.close();
 
 	}
